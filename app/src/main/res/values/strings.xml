@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Around Me</string>
+    <string name="res_one">Ummrao</string>
+    <string name="res_two">Wasabi by Morimoto</string>
+    <string name="res_three">Fifty Five East</string>
+    <string name="res_four">Mabruk-Mediterranean</string>
+    <string name="res_five">The Table</string>
+    <string name="add_one"> C.T.S, 215, Andheri - Kurla Rd, Andheri East, Mumbai, Maharashtra 400059</string>
+    <string name="add_two">The Taj Mahal Palace, Mumbai, Apollo Bandar, Colaba, Mumbai, Maharashtra 400001</string>
+    <string name="add_three">Grand Hyatt Mumbai Hotel and Residences Bandra Kurla Complex Vicinity, Off, Western Express Hwy, Santacruz East, Mumbai, Maharashtra 400055</string>
+    <string name="add_four">Sahara Star Domestic Airport, Navpada, Vile Parle East, Santacruz East, Mumbai, Maharashtra 400099</string>
+    <string name="add_five">Address: Kalapesi Trust Building, Ground Floor, opposite Dhanraj Mahal, Apollo Bandar, Colaba, Mumbai, Maharashtra 400039</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+</resources>
