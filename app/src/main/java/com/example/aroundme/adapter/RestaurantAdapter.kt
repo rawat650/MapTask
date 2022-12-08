@@ -28,7 +28,8 @@ class RestaurantAdapter( val context: Context, val list: ArrayList<RestaurantDat
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.acitivity_item_view, parent, false)
+        return ViewHolder(
+            LayoutInflater.from(parent.context).inflate(R.layout.acitivity_item_view, parent, false)
         )
     }
 
@@ -44,30 +45,39 @@ class RestaurantAdapter( val context: Context, val list: ArrayList<RestaurantDat
 
             }
             itemView.ivWishlist.setOnClickListener {
-                onItemClickListener?.let {
-                    it(resData)
-                }
+                mListener.addWishList(position, resData)
             }
+
 
         }
 
     }
 
-    override fun getItemCount(): Int =  list.size
+    override fun getItemCount(): Int = list.size
 
     interface OnItemClickListener {
         fun onItemclick(position: Int, restaurantData: RestaurantData)
+        fun addWishList(position: Int, restaurantData: RestaurantData)
 
     }
-
-
-    private var onItemClickListener: ((RestaurantData) -> Unit)? = null
-    fun setOnItemClickListener(listener: (RestaurantData) -> Unit) {
-        onItemClickListener = listener
-    }
-
 
     fun ItemClickListener(listener: OnItemClickListener) {
         mListener = listener
     }
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+

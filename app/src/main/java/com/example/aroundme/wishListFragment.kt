@@ -19,14 +19,6 @@ import kotlinx.android.synthetic.main.fragment_wish_list.*
 
 class wishListFragment : BaseFragment() {
 
-    lateinit var viewModel: RestaurantViewModel
-
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -36,7 +28,10 @@ class wishListFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val viewModel: RestaurantViewModel = ViewModelProvider(requireActivity(), factory(Repository(RestaurantDb(requireContext())))).get(RestaurantViewModel::class.java)
+        val viewModel: RestaurantViewModel = ViewModelProvider(
+            requireActivity(),
+            factory(Repository(RestaurantDb(requireContext())))
+        ).get(RestaurantViewModel::class.java)
 
         // get the  wishlist data and set in the recyclerview
         viewModel.getData().observe(viewLifecycleOwner, Observer {
@@ -44,11 +39,11 @@ class wishListFragment : BaseFragment() {
             ivWishlistRecyclerView.apply {
                 layoutManager = LinearLayoutManager(activity)
                 adapter = resAdapter
-              swipe(resAdapter,viewModel)
+                deleData(resAdapter, viewModel)
 
 
+            }
+        })
     }
-    })
-}
 }
 

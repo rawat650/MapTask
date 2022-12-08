@@ -34,7 +34,7 @@ class NearbyFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val list: ArrayList<RestaurantData> = ArrayList()
-        data(list)
+        addData(list)
         var rAdapter = RestaurantAdapter(requireContext(), list)
         recyclerView.apply {
             layoutManager = LinearLayoutManager(activity)
@@ -43,29 +43,33 @@ class NearbyFragment : BaseFragment() {
         }
 
 
-        val viewModel: RestaurantViewModel = ViewModelProvider(requireActivity(), factory(Repository(RestaurantDb(requireContext())))).get(RestaurantViewModel::class.java)
+        val viewModel: RestaurantViewModel = ViewModelProvider(
+            requireActivity(),
+            factory(Repository(RestaurantDb(requireContext())))
+        ).get(RestaurantViewModel::class.java)
 
 
 
-        //     insert the data into wishlist
-        rAdapter.setOnItemClickListener {
-            ivWishlist.visibility = View.GONE
-            ivDarkWishlist.visibility = View.VISIBLE
-            showToast("item is added into wishList")
-            viewModel.insertdata(it)
-        }
 
-        //implement listner of the restaurant adapter
         rAdapter.ItemClickListener(object : RestaurantAdapter.OnItemClickListener {
             override fun onItemclick(position: Int, restaurantData: RestaurantData) {
-                val intent = Intent(context, MapActivity::class.java)
-                intent.putExtra(AppConstants.LATITUDE, restaurantData.latitude)
-                intent.putExtra(AppConstants.LONGITUDE, restaurantData.longitude)
-                intent.putExtra(AppConstants.NAME, restaurantData.name)
-                intent.putExtra(AppConstants.IMAGE, restaurantData.image)
-                intent.putExtra(AppConstants.ADDRESS, restaurantData.address)
-                startActivity(intent)
+                Intent(context, MapActivity::class.java).apply {
+                    putExtra(AppConstants.LATITUDE, restaurantData.latitude)
+                    putExtra(AppConstants.LONGITUDE, restaurantData.longitude)
+                    putExtra(AppConstants.NAME, restaurantData.name)
+                    putExtra(AppConstants.IMAGE, restaurantData.image)
+                    putExtra(AppConstants.ADDRESS, restaurantData.address)
+                    startActivity(this)
 
+                }
+            }
+
+            //     insert the data into wishlist
+            override fun addWishList(position: Int, restaurantData: RestaurantData) {
+                ivWishlist.visibility = View.GONE
+                ivDarkWishlist.visibility = View.VISIBLE
+                showToast("item is added into wishList")
+                viewModel.insertdata(restaurantData)
             }
 
         })
